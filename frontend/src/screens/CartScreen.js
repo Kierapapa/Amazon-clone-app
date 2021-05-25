@@ -42,7 +42,7 @@ const CartScreen = (props) => {
                         </div>
                         :
                         cartItems.map(item=> 
-                            <li>
+                            <li key={item.product}>
                             <div className="cart-image">
                                 <Link to={"/products/"+item.product}>
                                 <img src={item.image} alt={item.name} title={item.name} />
@@ -73,8 +73,8 @@ const CartScreen = (props) => {
                 </ul>
             </div>
             <div className="cart-action">
-                <h3>Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} items)
-                : $ {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                <h3>Subtotal ( {cartItems.reduce((a, c) => Number(a) + Number(c.qty), 0)} items)
+                : $ {cartItems.reduce((a, c) => Number(a) + Number(c.price) * Number(c.qty), 0)}
                 </h3>
                 <button type="button" className="add-to-cart-button primary fullwidth" onClick={handleCheckOut} disabled={cartItems.length === 0 }>
                     Proceed to Checkout
